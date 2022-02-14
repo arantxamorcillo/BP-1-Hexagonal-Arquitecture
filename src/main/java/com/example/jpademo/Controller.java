@@ -12,7 +12,7 @@ public class Controller {
     UserRepository userRepository;
 
     @Autowired
-    PersonRepository personRepository;
+    PersonService personService;
 
 
 
@@ -33,40 +33,39 @@ public class Controller {
     }
 
     @PostMapping("/addperson")
-    public String addPerson(@RequestBody Person person) throws Exception {
-
-        String message;
-
-        if(person.user == null){
-            throw new Exception("User mustn't be null");
-//            message = "User mustn't be null";
-        }else {
-            personRepository.saveAndFlush(person);
-            message = "Added "+person;
-        }
-        return message;
+    public String addPerson(@RequestBody PersonDtoInput personDtoInput){
+        System.out.println(personDtoInput.toString());
+        personService.createPerson(personDtoInput.person());
+        return "ok";
     }
 
-//    @PutMapping("{attribute}")
-//    public Person updatePerson(@PathVariable int id, @RequestBody Person person){
-//        Person personToUpdate = personRepository.getById(id);
-//        personToUpdate.
-//
-//    }
+    @PutMapping("{id}")
+    public PersonDtoOutput updatePerson(@PathVariable int id, @RequestBody PersonDtoInput personDtoInput){
+        Person personToUpdate = personService.updatePerson(id, personDtoInput);
+        PersonDtoOutput personUpdated = new PersonDtoOutput(personToUpdate);
+        return personUpdated;
+
+    }
+
+    @DeleteMapping("/person/delete/{id}")
+    public String deletePerson(@PathVariable int id){
+        personService.deleteUser(id);
+        return "delete";
+    }
 
     @GetMapping("/person")
     public List<Person> getAll(){
-        return personRepository.findAll();
+        return personService.getPersons();
     }
 
     @GetMapping("/person/{id}")
     public Person getById(@PathVariable int id) throws  Exception {
-        return personRepository.findById(id).orElseThrow(() -> new Exception("id not found"));
+        return personService.findById(id);
     }
 
     @GetMapping("/person/user/{user}")
     public Person getByUser(@PathVariable String user)  {
-        return personRepository.findByUser(user);
+        return personService.findByUser(user);
     }
 
 }
