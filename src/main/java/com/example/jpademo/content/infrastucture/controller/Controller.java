@@ -1,5 +1,9 @@
-package com.example.jpademo;
+package com.example.jpademo.content.infrastucture.controller;
 
+import com.example.jpademo.content.application.PersonService;
+import com.example.jpademo.content.domain.Person;
+import com.example.jpademo.content.infrastucture.dto.PersonDtoInput;
+import com.example.jpademo.content.infrastucture.dto.PersonDtoOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,29 +12,10 @@ import java.util.List;
 @RestController
 public class Controller {
 
-    @Autowired
-    UserRepository userRepository;
+
 
     @Autowired
     PersonService personService;
-
-
-
-    @GetMapping
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
-    }
-
-    @PostMapping("/adduser")
-    public User addUser(@RequestBody User user){
-        userRepository.save(user);
-        return user;
-    }
-
-    @GetMapping("{id}")
-    public User getById(@PathVariable String id) throws Exception {
-        return userRepository.findById(id).orElseThrow(() -> new Exception("user not found"));
-    }
 
     @PostMapping("/addperson")
     public String addPerson(@RequestBody PersonDtoInput personDtoInput){

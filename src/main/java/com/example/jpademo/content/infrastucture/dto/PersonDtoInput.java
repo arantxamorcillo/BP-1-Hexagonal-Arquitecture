@@ -1,5 +1,6 @@
-package com.example.jpademo;
+package com.example.jpademo.content.infrastucture.dto;
 
+import com.example.jpademo.content.domain.Person;
 import lombok.Data;
 
 import java.time.LocalDate;

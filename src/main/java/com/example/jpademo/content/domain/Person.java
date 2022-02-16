@@ -1,6 +1,7 @@
-package com.example.jpademo;
+package com.example.jpademo.content.domain;
 
 
+import com.example.jpademo.content.infrastucture.dto.PersonDtoInput;
 import com.sun.istack.NotNull;
 import lombok.Data;
 

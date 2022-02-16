@@ -1,5 +1,8 @@
-package com.example.jpademo;
+package com.example.jpademo.content.application;
 
+import com.example.jpademo.content.domain.Person;
+import com.example.jpademo.content.infrastucture.dto.PersonDtoInput;
+import com.example.jpademo.content.infrastucture.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.jpademo;
+package com.example.jpademo.App;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
